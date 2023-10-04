@@ -25,7 +25,7 @@ model user{
 
 model hairpart{
   id Int @id @default(autoincrement()) 
-  file_name String
+  name String
   bodypart_id Int
   bodypart bodypart @relation(fields: [bodypart_id],references: [id])
   created_at DateTime @default(now())
@@ -34,8 +34,8 @@ model hairpart{
 
 model eyebrowspart{
   id Int @id @default(autoincrement()) 
-  file_name String
-    bodypart_id Int
+  name String
+  bodypart_id Int
   bodypart bodypart @relation(fields: [bodypart_id],references: [id])
   created_at DateTime @default(now())
   deleteflg String
@@ -43,8 +43,8 @@ model eyebrowspart{
 
 model eyepart{
   id Int @id @default(autoincrement()) 
-  file_name String
-    bodypart_id Int
+  name String
+  bodypart_id Int
   bodypart bodypart @relation(fields: [bodypart_id],references: [id])
   created_at DateTime @default(now())
   deleteflg String
@@ -52,7 +52,7 @@ model eyepart{
 
 model mouthpart{
   id Int @id @default(autoincrement()) 
-  file_name String
+  name String
   bodypart_id Int
   bodypart bodypart @relation(fields: [bodypart_id],references: [id])
   created_at DateTime @default(now())
