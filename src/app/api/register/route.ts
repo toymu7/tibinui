@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 
 /**
  * 新規ユーザー登録処理を行う。
- * @returns 処理結果
  */
 export async function POST(request: Response) {
     try {
