@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import styles from "./login.module.css";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface LoginForm {
     email: string;
@@ -20,6 +21,7 @@ const validationSchema = z.object({
 });
 
 export default function Login() {
+    const router = useRouter();
     const {
         register,
         handleSubmit,
@@ -29,8 +31,28 @@ export default function Login() {
         resolver: zodResolver(validationSchema),
     });
 
-    const onSubmit = (data: LoginForm) => {
-        console.log("Submitted Data", data);
+    const onSubmit = async (requestData: LoginForm) => {
+        console.log("Submitted Data", requestData);
+        const res = await fetch("http://localhost:3000/api/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email: requestData.email,
+                password: requestData.password,
+            }),
+            cache: "no-store",
+        });
+
+        const data = await res.json();
+        console.log(data);
+
+        if (data.token) {
+            console.log("ログイン成功");
+            localStorage.setItem("token", data.token);
+            router.push("./main");
+        }
     };
 
     return (

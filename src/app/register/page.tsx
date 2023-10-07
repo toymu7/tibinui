@@ -6,7 +6,7 @@ import { z } from "zod";
 import styles from "./register.module.css";
 import { useRouter } from "next/navigation";
 
-interface RegisterForm {
+export interface RegisterForm {
     name: string;
     email: string;
     password: string;
@@ -45,29 +45,25 @@ export default function Register() {
         resolver: zodResolver(validationSchema),
     });
 
-    const onSubmit = (requestData: RegisterForm) => {
-        console.log("aaa");
+    const onSubmit = async (requestData: RegisterForm) => {
         console.log("Submitted Dat", requestData);
-        // const res = await fetch("http://localhost:3000/api/register", {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify({
-        //         name: requestData.name,
-        //         email: requestData.email,
-        //         password: requestData.password,
-        //     }),
-        // });
+        const res = await fetch("http://localhost:3000/api/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                name: requestData.name,
+                email: requestData.email,
+                password: requestData.password,
+            }),
+            cache: "no-store",
+        });
 
-        // const data = await res.json();
-        // if (data.token) {
-        console.log("aaa");
-        if (true) {
-            console.log("bbb");
-            // alert("ログイン成功");
-            // localStorage.setItem("token", data.token);
+        const data = await res.json();
+        console.log(data);
 
+        if (data.token) {
             router.push("./");
         }
     };

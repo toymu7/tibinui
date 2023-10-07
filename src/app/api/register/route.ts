@@ -1,23 +1,29 @@
 import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 
-export async function GET(request: Request, response: Response) {}
-
-export async function POST(request: Request, response: Response) {
-    // ユーザーを新規作成する。
+/**
+ * 新規ユーザー登録処理を行う。
+ * @returns 処理結果
+ */
+export async function POST(request: Response) {
     try {
+        const req = await request.json();
         const prisma = new PrismaClient();
+        // 項目の数の制約上、一部ベタ書く
         const newUser = await prisma.user.create({
             data: {
-                username: "aaaa",
+                username: req.name,
                 gender: "otoko",
                 date_of_birth: "1999/01/30",
-                email: "two.@gmai.com",
-                password: "aaaaaaaaaaaa",
+                email: req.email,
+                password: req.password,
                 deleteflg: "0",
             },
         });
-        return NextResponse.json({ message: newUser }, { status: 300 });
+        return NextResponse.json(
+            { message: newUser, token: "token" },
+            { status: 200 }
+        );
     } catch (e) {
         return NextResponse.json({ message: e }, { status: 500 });
     }
