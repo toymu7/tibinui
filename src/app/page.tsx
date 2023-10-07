@@ -27,7 +27,8 @@ export default function Login() {
         handleSubmit,
         formState: { errors },
     } = useForm<LoginForm>({
-        mode: "onChange",
+        mode: "onSubmit",
+        // reValidateMode: "onSubmit",
         resolver: zodResolver(validationSchema),
     });
 

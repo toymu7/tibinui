@@ -41,7 +41,8 @@ export default function Register() {
         handleSubmit,
         formState: { errors },
     } = useForm<RegisterForm>({
-        mode: "onChange",
+        mode: "onSubmit",
+        // reValidateMode: "onSubmit",
         resolver: zodResolver(validationSchema),
     });
 
