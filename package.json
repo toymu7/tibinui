@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write src"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.1",
@@ -19,9 +20,11 @@
     "next": "13.5.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-horizontal-scrolling-menu": "^4.1.1",
     "typescript": "5.2.2"
   },
   "devDependencies": {
+    "prettier": "^3.0.3",
     "prisma": "^5.4.1"
   }
 }

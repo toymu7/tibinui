@@ -1,0 +1,96 @@
+.partContainer {
+  padding-top: 20px;
+}
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3列のグリッドを作成 */
+  grid-template-rows: repeat(2, 1fr); /* 2行のグリッドを作成 */
+  gap: 16px; /* グリッドアイテム間の間隔 */
+  padding: 16px; /* コンテナの内側の余白 */
+  max-width: 800px; /* グリッドの最大幅 */
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+}
+.eyeblowImg {
+  width: 100%;
+  height: 10%;
+}
+
+.card {
+  border: "1px solid";
+  display: "inline-block";
+  margin: "0 10px";
+  width: "160px";
+}
+/* .partFrame{
+    border: "1px solid black";
+    display: "inline-block";
+    margin: "0 10px";
+    width: "160px";
+    userSelect: "none";
+}
+.selectedFrame {
+    border: 2px solid blue;
+  } */
+/* .body{
+    padding: 0 !important;
+    margin: 0 !important;
+} */
+
+.container {
+  width: 100%;
+  height: 50%;
+  text-align: center;
+  align-items: center;
+  padding: 50px;
+}
+.ul {
+  display: flex;
+  width: 100%;
+  list-style: none;
+  border: 1px solid blue;
+  border-radius: 3px;
+  padding: 0 !important;
+  margin: 0 !important;
+  /* text-align: center; */
+}
+.ul li {
+  cursor: pointer;
+  width: 100%;
+  /* margin-right: 10px; */
+  border-right: 1px solid #ccc;
+  padding: 0 5px;
+  background-color: white;
+}
+.ul li:hover {
+  background-color: #fafad2;
+}
+.partsname {
+  width: 30%;
+  display: inline-block;
+  text-align: center;
+  position: absolute;
+  top: 65%; /* 画像の上端に配置 */
+  left: 50%; /* 画像の左端に配置 */
+  transform: translate(-50%, -50%); /* 中央揃えの調整 */
+}
+.baseImg {
+  width: 30%;
+  height: 30%;
+  position: relative;
+}
+
+.partBackImg {
+  display: inline-block;
+  position: absolute;
+  top: 92%; /* 画像の上端に配置 */
+  left: 50%; /* 画像の左端に配置 */
+  transform: translate(-50%, -50%); /* 中央揃えの調整 */
+  width: 50%;
+  height: 50%;
+  background-color: #fafad2;
+  border-radius: 3px;
+}
