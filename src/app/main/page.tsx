@@ -17,7 +17,7 @@ export default function App() {
   useEffect(() => {
     const externalData = [
       { id: 1, src: "/hair/hair01.png" },
-      { id: 2, src: "/hair/hair01.png" },
+      { id: 2, src: "/hair/hair02.png" },
       { id: 3, src: "/hair/hair01.png" },
       { id: 4, src: "/hair/hair01.png" },
       { id: 5, src: "/hair/hair01.png" },
@@ -47,7 +47,7 @@ export default function App() {
   useEffect(() => {
     const externalData = [
       { id: 1, src: "/eyebrow/eyebrow01.png" },
-      { id: 2, src: "/eyebrow/eyebrow01.png" },
+      { id: 2, src: "/eyebrow/eyebrow02.png" },
       { id: 3, src: "/eyebrow/eyebrow01.png" },
       { id: 4, src: "/eyebrow/eyebrow01.png" },
       { id: 5, src: "/eyebrow/eyebrow01.png" },
@@ -62,7 +62,7 @@ export default function App() {
   useEffect(() => {
     const externalData = [
       { id: 1, src: "/mouth/mouth01.png" },
-      { id: 2, src: "/mouth/mouth01.png" },
+      { id: 2, src: "/mouth/mouth02.png" },
       { id: 3, src: "/mouth/mouth01.png" },
       { id: 4, src: "/mouth/mouth01.png" },
       { id: 5, src: "/mouth/mouth01.png" },
