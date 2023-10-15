@@ -25,20 +25,6 @@
   margin: "0 10px";
   width: "160px";
 }
-/* .partFrame{
-    border: "1px solid black";
-    display: "inline-block";
-    margin: "0 10px";
-    width: "160px";
-    userSelect: "none";
-}
-.selectedFrame {
-    border: 2px solid blue;
-  } */
-/* .body{
-    padding: 0 !important;
-    margin: 0 !important;
-} */
 
 .container {
   width: 100%;
@@ -81,6 +67,7 @@
   width: 30%;
   height: 30%;
   position: relative;
+  z-index: 0;
 }
 
 .partBackImg {
@@ -93,4 +80,43 @@
   height: 50%;
   background-color: #fafad2;
   border-radius: 3px;
+}
+.hairPartposition {
+  position: absolute;
+  top: 3.8%; /* 画像の上端に配置 */
+  left: 36.5%; /* 画像の左端に配置 */
+  z-index: 2;
+}
+.hairPart {
+  width: 125%;
+  height: 125%;
+}
+.eyeblowPartposition {
+  position: absolute;
+  top: 30%; /* 画像の上端に配置 */
+  left: 40.8%; /* 画像の左端に配置 */
+  z-index: 1;
+}
+.eyeblowPart {
+  width: 100%;
+  height: 100%;
+}
+.eyesPartposition {
+  position: absolute;
+  top: 33%; /* 画像の上端に配置 */
+  left: 33%; /* 画像の左端に配置 */
+  z-index: 1;
+}
+.eyesPart {
+  width: 52%;
+  height: 50%;
+}
+.mouthPartposition {
+  position: absolute;
+  top: 43%; /* 画像の上端に配置 */
+  left: 47%; /* 画像の左端に配置 */
+  z-index: 1;
+}
+.mouthPart {
+  width: 80%;
 }

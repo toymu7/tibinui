@@ -1,64 +1,108 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import "react-horizontal-scrolling-menu/dist/styles.css";
 import styles from "./test.module.css";
 import { LeftArrow, RightArrow } from "./arrows";
-import { HairCard } from "./hairCard";
-import { EyeblowCard } from "./eyeblowCard";
-import { EyesCard } from "./eyesCard";
-import { MouthCard } from "./mouthCard";
-import { log } from "console";
+import { PartCard } from "./partCard";
 import localbodyImg from "@/body/basebody.png";
 import Image from "next/image";
 
-// NOTE: embrace power of CSS flexbox!
-// import "./hideScrollbar.css";
-// import "./firstItemMargin.css";
-
 type scrollVisibilityApiType = React.ContextType<typeof VisibilityContext>;
 
-const elemPrefix = "Part";
-const getId = (index: number) => `${elemPrefix}${index}`;
-const getHairId = (index: number) => `${elemPrefix}${index}`;
-
-// const [hairItems] = React.useState(getHairItems);
-
 export default function App() {
-  const getItems = () =>
-    Array(20)
-      .fill(0)
-      .map((_, ind) => ({ id: getId(ind) }));
-  const [items] = React.useState(getItems);
-  const [hairSelected, setHairSelected] = React.useState<string>("");
-  const [eyeblowSelected, setEyeblowSelected] = React.useState<string>("");
-  const [eyesSelected, setEyesSelected] = React.useState<string>("");
-  const [mouthSelected, setMouthSelected] = React.useState<string>("");
-
-  console.log(hairSelected);
-
+  const [hairItems, setHairItems] = React.useState<
+    { id: number; src: string }[]
+  >([]);
+  useEffect(() => {
+    const externalData = [
+      { id: 1, src: "/hair/hair01.png" },
+      { id: 2, src: "/hair/hair01.png" },
+      { id: 3, src: "/hair/hair01.png" },
+      { id: 4, src: "/hair/hair01.png" },
+      { id: 5, src: "/hair/hair01.png" },
+      { id: 6, src: "/hair/hair01.png" },
+      // 他の画像データ
+    ];
+    setHairItems(externalData);
+  }, []); // 必要に応じてデータの取得方法を適切に設定
+  const [eyesItems, setEyesItems] = React.useState<
+    { id: number; src: string }[]
+  >([]);
+  useEffect(() => {
+    const externalData = [
+      { id: 1, src: "/eyes/eyes01.png" },
+      { id: 2, src: "/eyes/eyes01.png" },
+      { id: 3, src: "/eyes/eyes01.png" },
+      { id: 4, src: "/eyes/eyes01.png" },
+      { id: 5, src: "/eyes/eyes01.png" },
+      { id: 6, src: "/eyes/eyes01.png" },
+      // 他の画像データ
+    ];
+    setEyesItems(externalData);
+  }, []); // 必要に応じてデータの取得方法を適切に設定
+  const [eyeblowItems, setEyeblowItems] = React.useState<
+    { id: number; src: string }[]
+  >([]);
+  useEffect(() => {
+    const externalData = [
+      { id: 1, src: "/eyebrow/eyebrow01.png" },
+      { id: 2, src: "/eyebrow/eyebrow01.png" },
+      { id: 3, src: "/eyebrow/eyebrow01.png" },
+      { id: 4, src: "/eyebrow/eyebrow01.png" },
+      { id: 5, src: "/eyebrow/eyebrow01.png" },
+      { id: 6, src: "/eyebrow/eyebrow01.png" },
+      // 他の画像データ
+    ];
+    setEyeblowItems(externalData);
+  }, []); // 必要に応じてデータの取得方法を適切に設定
+  const [mouthItems, setMouthItems] = React.useState<
+    { id: number; src: string }[]
+  >([]);
+  useEffect(() => {
+    const externalData = [
+      { id: 1, src: "/mouth/mouth01.png" },
+      { id: 2, src: "/mouth/mouth01.png" },
+      { id: 3, src: "/mouth/mouth01.png" },
+      { id: 4, src: "/mouth/mouth01.png" },
+      { id: 5, src: "/mouth/mouth01.png" },
+      { id: 6, src: "/mouth/mouth01.png" },
+      // 他の画像データ
+    ];
+    setMouthItems(externalData);
+  }, []); // 必要に応じてデータの取得方法を適切に設定
+  const [hairSelected, setHairSelected] = React.useState<number>();
+  const [eyeblowSelected, setEyeblowSelected] = React.useState<number>();
+  const [eyesSelected, setEyesSelected] = React.useState<number>();
+  const [mouthSelected, setMouthSelected] = React.useState<number>();
   // NOTE: for select item
-  const handleHairItemClick = (itemId: string) => () => setHairSelected(itemId);
-  const handleEyeblowItemClick = (itemId: string) => () =>
+  const hairPartClick = (imageId: number, imageSrc: string) => () => {
+    setHairSelected(imageId);
+    setSelectedHair(imageSrc);
+  };
+  const eyeblowPartClick = (itemId: number, imageSrc: string) => () => {
     setEyeblowSelected(itemId);
-  const handleEyesItemClick = (itemId: string) => () => setEyesSelected(itemId);
-  const handleMouthItemClick = (itemId: string) => () =>
+    setSelectedEyeblow(imageSrc);
+  };
+  const eyesPartClick = (itemId: number, imageSrc: string) => () => {
+    setEyesSelected(itemId);
+    setSelectedEyes(imageSrc);
+  };
+  const mouthPartClick = (itemId: number, imageSrc: string) => () => {
     setMouthSelected(itemId);
+    setSelectedMouth(imageSrc);
+  };
   const [visibleDiv, setVisibleDiv] = useState<string | null>(null);
 
   const showDiv = (divId: string) => {
     setVisibleDiv(divId === visibleDiv ? null : divId);
   };
-
-  // const getHairItems = () =>
-  //   Array(20)
-  //     .fill(0)
-  //     .map((_, ind) => ({ hairId: getHairId(ind) }));
+  const [selectedHair, setSelectedHair] = useState<string | null>(null);
+  const [selectedEyeblow, setSelectedEyeblow] = useState<string | null>(null);
+  const [selectedEyes, setSelectedEyes] = useState<string | null>(null);
+  const [selectedMouth, setSelectedMouth] = useState<string | null>(null);
 
   function PartSelectName() {
-    const handleClick = () => {
-      alert("a");
-    };
     return (
       <div className={styles.partsname}>
         <ul className={styles.ul}>
@@ -73,6 +117,42 @@ export default function App() {
   return (
     <div className={styles.body}>
       <div className={styles.container}>
+        {selectedHair && (
+          <div className={styles.hairPartposition}>
+            <img
+              src={selectedHair}
+              alt="Selected HairPart"
+              className={styles.hairPart}
+            />
+          </div>
+        )}
+        {selectedEyeblow && (
+          <div className={styles.eyeblowPartposition}>
+            <img
+              src={selectedEyeblow}
+              alt="Selected eyeblowPart"
+              className={styles.eyeblowPart}
+            />
+          </div>
+        )}
+        {selectedEyes && (
+          <div className={styles.eyesPartposition}>
+            <img
+              src={selectedEyes}
+              alt="Selected eyeblowPart"
+              className={styles.eyesPart}
+            />
+          </div>
+        )}
+        {selectedMouth && (
+          <div className={styles.mouthPartposition}>
+            <img
+              src={selectedMouth}
+              alt="Selected eyeblowPart"
+              className={styles.mouthPart}
+            />
+          </div>
+        )}
         <div>
           <Image
             src={localbodyImg}
@@ -93,13 +173,12 @@ export default function App() {
               RightArrow={RightArrow}
               onWheel={onWheel}
             >
-              {items.map(({ id }) => (
-                <HairCard
-                  title={id}
-                  itemId={id} // NOTE: itemId is required for track items
-                  key={id}
-                  onClick={handleHairItemClick(id)}
+              {hairItems.map(({ id, src }) => (
+                <PartCard
+                  id={id}
+                  src={src}
                   selected={id === hairSelected}
+                  onClick={hairPartClick(id, src)}
                 />
               ))}
             </ScrollMenu>
@@ -115,13 +194,12 @@ export default function App() {
               RightArrow={RightArrow}
               onWheel={onWheel}
             >
-              {items.map(({ id }) => (
-                <EyeblowCard
-                  title={id}
-                  itemId={id} // NOTE: itemId is required for track items
-                  key={id}
-                  onClick={handleEyeblowItemClick(id)}
+              {eyeblowItems.map(({ id, src }) => (
+                <PartCard
+                  id={id}
+                  src={src}
                   selected={id === eyeblowSelected}
+                  onClick={eyeblowPartClick(id, src)}
                 />
               ))}
             </ScrollMenu>
@@ -137,13 +215,12 @@ export default function App() {
               RightArrow={RightArrow}
               onWheel={onWheel}
             >
-              {items.map(({ id }) => (
-                <EyesCard
-                  title={id}
-                  itemId={id} // NOTE: itemId is required for track items
-                  key={id}
-                  onClick={handleEyesItemClick(id)}
+              {eyesItems.map(({ id, src }) => (
+                <PartCard
+                  id={id}
+                  src={src}
                   selected={id === eyesSelected}
+                  onClick={eyesPartClick(id, src)}
                 />
               ))}
             </ScrollMenu>
@@ -159,13 +236,12 @@ export default function App() {
               RightArrow={RightArrow}
               onWheel={onWheel}
             >
-              {items.map(({ id }) => (
-                <MouthCard
-                  title={id}
-                  itemId={id} // NOTE: itemId is required for track items
-                  key={id}
-                  onClick={handleMouthItemClick(id)}
+              {mouthItems.map(({ id, src }) => (
+                <PartCard
+                  id={id}
+                  src={src}
                   selected={id === mouthSelected}
+                  onClick={mouthPartClick(id, src)}
                 />
               ))}
             </ScrollMenu>

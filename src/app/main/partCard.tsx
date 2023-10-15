@@ -1,28 +1,19 @@
 import React from "react";
-import Image from "next/image";
-import localhairImg from "@/hair/hair.png";
 import styles from "./test.module.css";
 
-import { VisibilityContext } from "react-horizontal-scrolling-menu";
-
-export function HairCard({
-  itemId,
-  selected,
-  onClick,
-  title,
-}: {
-  itemId: string;
+interface partCardProps {
+  id: number;
+  src: string;
   selected: boolean;
-  onClick: Function;
-  title: string;
-}) {
-  const visibility = React.useContext(VisibilityContext);
+  onClick: () => void;
+}
 
-  const visible = visibility.isItemVisible(itemId);
-
+export function PartCard({ id, src, selected, onClick }: partCardProps) {
+  const handleImageClick = () => {
+    onClick(); // クリック時に親コンポーネントに画像データを通知
+  };
   return (
     <div
-      onClick={() => onClick()}
       role="button"
       // className={`${styles.partFrame} ${selected ? styles.selectedFrame : ''}`}
       style={{
@@ -37,8 +28,9 @@ export function HairCard({
         backgroundColor: "white",
       }}
       tabIndex={0}
+      onClick={handleImageClick}
     >
-      <Image src={localhairImg} alt="髪" className={styles.img}></Image>
+      <img key={id} src={src} alt={`Image ${id}`} className={styles.img} />
     </div>
   );
 }
