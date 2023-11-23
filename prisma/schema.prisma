@@ -10,67 +10,66 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user{
-  id Int @id @default(autoincrement()) 
-  username String
-  gender String
+model user {
+  id            Int        @id @default(autoincrement())
+  username      String
+  gender        String
   date_of_birth String
-  email String
-  password String
-  created_at DateTime @default(now())
-  deleteflg String
-  bodyparts bodypart[]
+  email         String
+  password      String
+  created_at    DateTime   @default(now())
+  deleteflg     String
+  bodyparts     bodypart[]
 }
 
-
-model hairpart{
-  id Int @id @default(autoincrement()) 
-  name String
+model hairpart {
+  id          Int      @id @default(autoincrement())
+  name        String
   bodypart_id Int
-  bodypart bodypart @relation(fields: [bodypart_id],references: [id])
-  created_at DateTime @default(now())
-  deleteflg String
+  bodypart    bodypart @relation(fields: [bodypart_id], references: [id])
+  created_at  DateTime @default(now())
+  deleteflg   String
 }
 
-model eyebrowspart{
-  id Int @id @default(autoincrement()) 
-  name String
+model eyebrowpart {
+  id          Int      @id @default(autoincrement())
+  name        String
   bodypart_id Int
-  bodypart bodypart @relation(fields: [bodypart_id],references: [id])
-  created_at DateTime @default(now())
-  deleteflg String
+  bodypart    bodypart @relation(fields: [bodypart_id], references: [id])
+  created_at  DateTime @default(now())
+  deleteflg   String
 }
 
-model eyepart{
-  id Int @id @default(autoincrement()) 
-  name String
+model eyepart {
+  id          Int      @id @default(autoincrement())
+  name        String
   bodypart_id Int
-  bodypart bodypart @relation(fields: [bodypart_id],references: [id])
-  created_at DateTime @default(now())
-  deleteflg String
+  bodypart    bodypart @relation(fields: [bodypart_id], references: [id])
+  created_at  DateTime @default(now())
+  deleteflg   String
 }
 
-model mouthpart{
-  id Int @id @default(autoincrement()) 
-  name String
+model mouthpart {
+  id          Int      @id @default(autoincrement())
+  name        String
   bodypart_id Int
-  bodypart bodypart @relation(fields: [bodypart_id],references: [id])
-  created_at DateTime @default(now())
-  deleteflg String
+  bodypart    bodypart @relation(fields: [bodypart_id], references: [id])
+  created_at  DateTime @default(now())
+  deleteflg   String
 }
 
-model bodypart{
-  id Int @id @default(autoincrement()) 
-  user_id Int
-  user user @relation(fields: [user_id],references: [id])
-  hairpart_id Int
-  hairparts hairpart[]
-  eyebrowspart Int
-  eyebrowsparts eyebrowspart[]
-  eyepart Int
-  eyeparts eyepart[]
-  mouthpart Int
-  mouthparts mouthpart[]
-  created_at DateTime @default(now())
-  deleteflg String
+model bodypart {
+  id             Int           @id @default(autoincrement())
+  user_id        Int
+  user           user          @relation(fields: [user_id], references: [id])
+  hairpart_id    Int
+  hairpart       hairpart[]
+  eyebrowpart_id Int
+  eyebrowpart    eyebrowpart[]
+  eyepart_id     Int
+  eyepart        eyepart[]
+  mouthpart_id   Int
+  mouthpart      mouthpart[]
+  created_at     DateTime      @default(now())
+  deleteflg      String
 }
