@@ -35,10 +35,9 @@ export function LeftArrow() {
     React.useContext(VisibilityContext);
 
   const [disabled, setDisabled] = React.useState(
-    !initComplete || (initComplete && isFirstItemVisible),
+    !initComplete || (initComplete && isFirstItemVisible)
   );
   React.useEffect(() => {
-    // NOTE: detect if whole component visible
     if (visibleElements.length) {
       setDisabled(isFirstItemVisible);
     }
@@ -56,7 +55,7 @@ export function RightArrow() {
     React.useContext(VisibilityContext);
 
   const [disabled, setDisabled] = React.useState(
-    !visibleElements.length && isLastItemVisible,
+    !visibleElements.length && isLastItemVisible
   );
   React.useEffect(() => {
     if (visibleElements.length) {

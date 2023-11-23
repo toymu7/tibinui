@@ -21,9 +21,16 @@
     "paths": {
       // "@/*": ["./src/*"]
       "@/*": ["./public/*"]
-
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/main/page.tsx", "src/app/main/page.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/app/main/page.tsx",
+    "src/app/main/page.tsx",
+    "src/app/main/hair.jsx"
+  ],
   "exclude": ["node_modules"]
 }
