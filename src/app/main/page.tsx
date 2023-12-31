@@ -1,9 +1,5 @@
-"use client";
+import PartCard from "./PartCard";
 
-import React from "react";
-import authCheck from "@/utils/authCheck";
-
-export default function Main() {
-    const check = authCheck();
-    return <h1>Main</h1>;
+export default function App() {
+  return <PartCard />;
 }
