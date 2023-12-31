@@ -1,37 +1,44 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
-import "react-horizontal-scrolling-menu/dist/styles.css";
+import React, { useState } from "react";
 import styles from "./test.module.css";
 
 import PartSelectName from "./PartSelectName";
 
-import HairPart001 from "@/hair/HairPart001";
-import HairPart002 from "@/hair/HairPart002";
-import EyesBrowPart001 from "@/eyebrow/EyesBrowPart001";
-import EyesBrowPart002 from "@/eyebrow/EyesBrowPart002";
-import EyesPart001 from "@/eyes/EyesPart001";
-import EyesPart002 from "@/eyes/EyesPart002";
-import MouthPart001 from "@/mouth/MouthPart001";
-import MouthPart002 from "@/mouth/MouthPart002";
+import { HairPartComponentArr } from "../components/Part/HairPart";
+import { EyebrowsPartComponentArr } from "../components/Part/EyeBrowsPart";
+import { EyesPartComponentArr } from "../components/Part/EyesPart";
+import { MouthPartComponentArr } from "../components/Part/MouthPart";
 
-type scrollVisibilityApiType = React.ContextType<typeof VisibilityContext>;
+import {
+  UpButton,
+  DownButton,
+  ExpandButton,
+  NarrowButton,
+  ScaleDownButton,
+  ScaleUpButton,
+  LeftRotateButton,
+  RightRotateButton,
+  Button,
+} from "../components/Button/Button";
+import { usePartClick } from "./PartClick.hook";
+import { usePartTranslate } from "./PartTranslate.hook";
+import { usePartsEffect } from "./MergePart.hook";
 
 export default function PartCard() {
-  const [hairSelected, setHairSelected] = React.useState<number>();
-  const [eyebrowSelected, setEyebrowSelected] = React.useState<number>();
-  const [eyesSelected, setEyesSelected] = React.useState<number>();
-  const [mouthSelected, setMouthSelected] = React.useState<number>();
-
-  // パーツ選択の状態管理
-  const [HairPart, setHairPart] = useState<any>(null);
-  const [EyebrowPart, setEyebrowPart] = useState<any>(null);
-  const [EyesPart, setEyesPart] = useState<any>(null);
-  const [MouthPart, setMouthPart] = useState<any>(null);
-  //   4パーツを登録する
-  const [selectedParts, setSelectedParts] = useState<{
-    [key: string]: { [key: string]: number };
-  }>({});
+  const { partsIndex, parts, setParts, partClick, activePartName } =
+    usePartClick();
+  const {
+    ScaleUp,
+    ScaleDown,
+    Expand,
+    Narrow,
+    External,
+    Internal,
+    Up,
+    Down,
+    PartStyle,
+    // Reset,
+  } = usePartTranslate();
 
   // 活性/非活性にする要素の状態管理
   const [visibleDiv, setVisibleDiv] = useState<string | null>(null);
@@ -39,66 +46,53 @@ export default function PartCard() {
   const displayElement = (data: any) => {
     setVisibleDiv(data);
   };
-  const isButtonDisabled = Object.keys(selectedParts).length !== 4;
+  const isButtonDisabled = Object.keys(partsIndex).length !== 4;
   const checkDesign = () => {
     alert("これで良いのか");
   };
-
-  //  ここで`circleFill`ステートを変更
-  const [circleFill, setCircleFill] = useState("blue");
-  const handleColorChange = () => {
-    setCircleFill(circleFill === "red" ? "blue" : "red");
-  };
-
-  // コンポーネントを配列に格納
-  const hairPartComponentArr = [<HairPart001 />, <HairPart002 />]; //髪
-  const eyebrowPartComponentArr = [<EyesBrowPart001 />, <EyesBrowPart002 />]; //眉毛
-  const eyesPartComponentArr = [<EyesPart001 />, <EyesPart002 />]; //目
-  const mouthPartComponentArr = [<MouthPart001 />, <MouthPart002 />]; //口
-
-  // パーツのクリックイベント
-  const hairPartClick = (index: number, component: any) => {
-    setHairSelected(index);
-    setHairPart(component);
-  };
-  const eyebrowPartClick = (index: number, component: any) => {
-    setEyebrowSelected(index);
-    setEyebrowPart(component);
-  };
-  const eyesPartClick = (index: number, component: any) => {
-    setEyesSelected(index);
-    setEyesPart(component);
-  };
-  const mouthPartClick = (index: number, component: any) => {
-    setMouthSelected(index);
-    setMouthPart(component);
-  };
+  // パーツカスタムボタンが変更するとパーツにstyleを反映させる
+  usePartsEffect(parts, setParts, PartStyle, activePartName);
 
   return (
     <div className={styles.container}>
-      <button onClick={handleColorChange}>色を変更</button>
-
       <div className={styles.partContainer}>
+        <div className={styles.leftMenu}></div>
         <div className={styles.partImage}>
           {/* 素体 */}
           <img src="/body/baseBody.jpg" alt="素体" className={styles.baseImg} />
-
           <div className={styles.hairPartPosition}>
-            <div className={styles.displayHairPart}>{HairPart}</div>
+            <div className={styles.displayHairPart}>{parts.HairPart}</div>
           </div>
-          <div className={styles.eyebrowPartposition}>{EyebrowPart}</div>
-          <div className={styles.eyesPartposition}>{EyesPart}</div>
+          <div className={styles.eyebrowPartposition}>{parts.EyebrowsPart}</div>
+          <div className={styles.eyesPartposition}>{parts.EyesPart}</div>
           <div className={styles.mouthPartposition}>
-            {MouthPart}
-            {/* <div className={styles.displayMouthPart}>{MouthPart}</div> */}
+            <div className={styles.displayMouthPart}>{parts.MouthPart}</div>
           </div>
         </div>
+        <div className={styles.rightMenu}>
+          <div className={styles.pre}></div>
+          <div className={styles.partSetting}>
+            <UpButton onClick={() => Up(activePartName)}></UpButton>
+            <DownButton onClick={() => Down(activePartName)}></DownButton>
+            <ExpandButton onClick={() => Expand(activePartName)}></ExpandButton>
+            <NarrowButton onClick={() => Narrow(activePartName)}></NarrowButton>
+            <ScaleUpButton
+              onClick={() => ScaleUp(activePartName)}
+            ></ScaleUpButton>
+            <ScaleDownButton
+              onClick={() => ScaleDown(activePartName)}
+            ></ScaleDownButton>
+            <LeftRotateButton
+              onClick={() => Internal(activePartName)}
+            ></LeftRotateButton>
+            <RightRotateButton
+              onClick={() => External(activePartName)}
+            ></RightRotateButton>
+            {/* <Button onClick={() => Reset()}>リセット</Button> */}
+          </div>
 
-        {/* <div className={styles.checkButton}>
-          <button onClick={checkDesign} disabled={isButtonDisabled}>
-            けってい
-          </button>
-        </div> */}
+          {/* </div> */}
+        </div>
       </div>
 
       <div className={styles.partMenuContainer}>
@@ -112,13 +106,13 @@ export default function PartCard() {
             visibleDiv === "hairPart" ? styles.visible : styles.hidden
           }`}
         >
-          {hairPartComponentArr.map((component, index) => (
+          {HairPartComponentArr.map((component: any, index) => (
             <div
               key={index}
               className={`${styles.part} ${
-                hairSelected === index ? styles.selected : ""
+                partsIndex.HairPart === index ? styles.selected : ""
               }`}
-              onClick={() => hairPartClick(index, component)}
+              onClick={() => partClick(index, "HairPart", component)}
             >
               {component}
             </div>
@@ -130,13 +124,13 @@ export default function PartCard() {
             visibleDiv === "eyeBrowPart" ? styles.visible : styles.hidden
           }`}
         >
-          {eyebrowPartComponentArr.map((component, index) => (
+          {EyebrowsPartComponentArr.map((component: any, index: number) => (
             <div
-              key={index}
+              key={index + 1}
               className={`${styles.part} ${
-                eyebrowSelected === index ? styles.selected : ""
+                partsIndex.EyebrowsPart === index ? styles.selected : ""
               }`}
-              onClick={() => eyebrowPartClick(index, component)}
+              onClick={() => partClick(index + 1, "EyebrowsPart", component)}
             >
               {component}
             </div>
@@ -148,13 +142,13 @@ export default function PartCard() {
             visibleDiv === "eyesPart" ? styles.visible : styles.hidden
           }`}
         >
-          {eyesPartComponentArr.map((component, index) => (
+          {EyesPartComponentArr.map((component: any, index) => (
             <div
               key={index}
               className={`${styles.part} ${
-                eyesSelected === index ? styles.selected : ""
+                partsIndex.EyesPartyes === index ? styles.selected : ""
               }`}
-              onClick={() => eyesPartClick(index, component)}
+              onClick={() => partClick(index + 1, "EyesPart", component)}
             >
               {component}
             </div>
@@ -166,13 +160,13 @@ export default function PartCard() {
             visibleDiv === "mouthPart" ? styles.visible : styles.hidden
           }`}
         >
-          {mouthPartComponentArr.map((component, index) => (
+          {MouthPartComponentArr.map((component: any, index) => (
             <div
               key={index}
               className={`${styles.part} ${
-                mouthSelected === index ? styles.selected : ""
+                partsIndex.MouthPart === index ? styles.selected : ""
               }`}
-              onClick={() => mouthPartClick(index, component)}
+              onClick={() => partClick(index + 1, "MouthPart", component)}
             >
               {component}
             </div>
@@ -181,19 +175,4 @@ export default function PartCard() {
       </div>
     </div>
   );
-}
-
-function onWheel(apiObj: scrollVisibilityApiType, ev: React.WheelEvent): void {
-  const isThouchpad = Math.abs(ev.deltaX) !== 0 || Math.abs(ev.deltaY) < 15;
-
-  if (isThouchpad) {
-    ev.stopPropagation();
-    return;
-  }
-
-  if (ev.deltaY < 0) {
-    apiObj.scrollNext();
-  } else if (ev.deltaY > 0) {
-    apiObj.scrollPrev();
-  }
 }

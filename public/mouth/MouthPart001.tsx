@@ -9,7 +9,7 @@ const MouthPart001: React.FC = () => {
       y="0px"
       width="80%"
       viewBox="0 0 1280 1280"
-      enable-background="new 0 0 1280 1280"
+      enableBackground="new 0 0 1280 1280"
       xmlSpace="preserve"
     >
       <path

@@ -1,10 +1,20 @@
-interface EyesBrowPart002Props {
-  fill?: string;
-}
+import type { EyeBrowsStyle } from "partType/eyeBrows";
+import { EyebrowsPartStyle } from "../../src/constants/initPartStyle";
 
-const EyesBrowPart002: React.FC<EyesBrowPart002Props> = ({
-  fill = "#313131",
-}) => {
+export default function EyesBrowPart002({
+  styleProps = EyebrowsPartStyle,
+}: {
+  styleProps?: EyeBrowsStyle;
+}) {
+  const {
+    fill,
+    scale,
+    leftTranslateX,
+    rightTranslateX,
+    translateY,
+    leftRotate,
+    rightRotate,
+  } = styleProps;
   return (
     <svg
       version="1.1"
@@ -15,11 +25,16 @@ const EyesBrowPart002: React.FC<EyesBrowPart002Props> = ({
       y="0px"
       width="100%"
       viewBox="0 0 1280 1280"
-      enable-background="new 0 0 1280 1280"
+      enableBackground="new 0 0 1280 1280"
       xmlSpace="preserve"
+      style={{ transform: `scale(${scale})` }}
     >
       <path
-        fill="#FFFFFF"
+        fill={fill}
+        style={{
+          transformOrigin: "center",
+          transform: `translate(${rightTranslateX}px, ${translateY}px) rotate(${rightRotate}deg)`,
+        }}
         opacity="0"
         stroke="none"
         d="
@@ -37,6 +52,10 @@ z"
       />
       <path
         fill={fill}
+        style={{
+          transformOrigin: "center",
+          transform: `translate(${leftTranslateX}px, ${translateY}px) rotate(${leftRotate}deg)`,
+        }}
         opacity="1.000000"
         stroke="none"
         d="
@@ -60,6 +79,10 @@ z"
       />
       <path
         fill={fill}
+        style={{
+          transformOrigin: "center",
+          transform: `translate(${rightTranslateX}px, ${translateY}px) rotate(${rightRotate}deg)`,
+        }}
         opacity="1.000000"
         stroke="none"
         d="
@@ -81,6 +104,10 @@ z"
       />
       <path
         fill={fill}
+        style={{
+          transformOrigin: "center",
+          transform: `translate(${leftTranslateX}px, ${translateY}px) rotate(${leftRotate}deg)`,
+        }}
         opacity="1.000000"
         stroke="none"
         d="
@@ -96,6 +123,10 @@ z"
       />
       <path
         fill={fill}
+        style={{
+          transformOrigin: "center",
+          transform: `translate(${rightTranslateX}px, ${translateY}px) rotate(${rightRotate}deg)`,
+        }}
         opacity="1.000000"
         stroke="none"
         d="
@@ -117,6 +148,10 @@ z"
       />
       <path
         fill={fill}
+        style={{
+          transformOrigin: "center",
+          transform: `translate(${leftTranslateX}px, ${translateY}px) rotate(${leftRotate}deg)`,
+        }}
         opacity="1.000000"
         stroke="none"
         d="
@@ -127,5 +162,4 @@ z"
       />
     </svg>
   );
-};
-export default EyesBrowPart002;
+}

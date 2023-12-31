@@ -1,25 +1,41 @@
-interface EyesBrowPart001Props {
-  fill?: string;
-}
+import type { EyeBrowsStyle } from "partType/eyeBrows";
+import { EyebrowsPartStyle } from "../../src/constants/initPartStyle";
 
-const EyesBrowPart001: React.FC<EyesBrowPart001Props> = ({
-  fill = "#313131",
-}) => {
+export default function EyesBrowPart001({
+  styleProps = EyebrowsPartStyle,
+}: {
+  styleProps?: EyeBrowsStyle;
+}) {
+  const {
+    fill,
+    scale,
+    leftTranslateX,
+    rightTranslateX,
+    translateY,
+    leftRotate,
+    rightRotate,
+  } = styleProps;
+
   return (
     <svg
       version="1.1"
-      id="Layer_1"
+      id="1"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       x="0px"
       y="0px"
       width="100%"
       viewBox="0 0 1024 1024"
-      enable-background="new 0 0 1024 1024"
+      enableBackground="new 0 0 1024 1024"
       xmlSpace="preserve"
+      style={{ transform: `scale(${scale})` }}
     >
       <path
         fill={fill}
+        style={{
+          transformOrigin: "center",
+          transform: `translate(${rightTranslateX}px, ${translateY}px) rotate(${rightRotate}deg)`,
+        }}
         opacity="1.000000"
         stroke="none"
         d="
@@ -43,6 +59,10 @@ const EyesBrowPart001: React.FC<EyesBrowPart001Props> = ({
       />
       <path
         fill={fill}
+        style={{
+          transformOrigin: "center",
+          transform: `translate(${leftTranslateX}px, ${translateY}px) rotate(${leftRotate}deg)`,
+        }}
         opacity="1.000000"
         stroke="none"
         d="
@@ -67,5 +87,4 @@ const EyesBrowPart001: React.FC<EyesBrowPart001Props> = ({
       />
     </svg>
   );
-};
-export default EyesBrowPart001;
+}
