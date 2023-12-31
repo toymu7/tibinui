@@ -13,7 +13,7 @@ const HairPart002: React.FC<HairPart002Props> = ({ fill = "#313131" }) => {
       y="0px"
       width="100%"
       viewBox="0 0 1280 1280"
-      enable-background="new 0 0 1280 1280"
+      enableBackground="new 0 0 1280 1280"
       xmlSpace="preserve"
     >
       <path

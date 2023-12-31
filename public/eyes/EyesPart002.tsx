@@ -1,9 +1,16 @@
+import React from "react";
+
 interface EyesPart002Props {
+  styleProps?: React.CSSProperties;
   fill?: string;
 }
 
-const EyesPart002: React.FC<EyesPart002Props> = ({ fill = "#313131" }) => {
-  // コンポーネントの中身
+export default function EyesPart002({
+  styleProps,
+  fill = "#313131",
+}: EyesPart002Props) {
+  const { ...rest } = styleProps || {};
+
   return (
     <svg
       version="1.1"
@@ -14,7 +21,7 @@ const EyesPart002: React.FC<EyesPart002Props> = ({ fill = "#313131" }) => {
       y="0px"
       width="100%"
       viewBox="0 0 1280 1280"
-      enable-background="new 0 0 1280 1280"
+      enableBackground="new 0 0 1280 1280"
       xmlSpace="preserve"
     >
       <path
@@ -265,6 +272,7 @@ M959.128784,598.650146
 z"
       />
       <path
+        style={rest}
         fill="#101010"
         opacity="1.000000"
         stroke="none"
@@ -1872,5 +1880,4 @@ z"
       />
     </svg>
   );
-};
-export default EyesPart002;
+}
