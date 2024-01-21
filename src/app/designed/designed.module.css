@@ -1,0 +1,190 @@
+/* .body {
+  padding: 0;
+  margin: auto;
+} */
+
+.container {
+  width: 50%;
+  text-align: center;
+  align-items: center;
+  margin: auto;
+  height: 100vh;
+  border: 1px solid blue;
+  /* background-color: #fff5e2de; */
+  z-index: -1;
+}
+.partContainer {
+  width: 100%;
+  height: 60%;
+  z-index: 0;
+  display: flex;
+}
+.leftMenu {
+  width: 25%;
+  display: flex;
+}
+.rightMenu {
+  width: 25%;
+  border: 1px solid red;
+}
+.pre {
+  height: 30%;
+}
+.partImage {
+  width: 50%;
+  height: auto;
+  margin: auto;
+  /* border: 1px solid forestgreen; */
+  margin-top: 10%;
+  position: relative;
+  z-index: -1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff5e2de;
+}
+.designedPart {
+  border: 1px solid gray;
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  width: 150px;
+  margin-right: 5px;
+  box-sizing: border-box;
+}
+
+.hair {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 1%;
+  left: 22.5%;
+  z-index: 1;
+  @media screen and (max-width: 1500px) {
+    max-width: 55%;
+  }
+}
+.eyebrows {
+  width: 80%;
+  height: auto;
+  position: absolute;
+  top: 10%;
+  left: 22.5%;
+  z-index: 1;
+  @media screen and (max-width: 1500px) {
+    max-width: 55%;
+  }
+}
+.eyes {
+  width: 45%;
+  height: auto;
+  position: absolute;
+  top: 16%;
+  left: 27.5%;
+  z-index: 1;
+  @media screen and (max-width: 1500px) {
+    max-width: 55%;
+  }
+}
+.mouth {
+  width: 15%;
+  height: auto;
+  position: absolute;
+  top: 37%;
+  left: 42.5%;
+  z-index: 1;
+  @media screen and (max-width: 1500px) {
+    max-width: 55%;
+  }
+}
+
+.partSetting {
+  width: 50%;
+  height: 70%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2列 */
+  grid-gap: 5%;
+}
+.baseBody {
+  width: 90%;
+  height: auto;
+}
+
+.partListContainer {
+  width: 100%;
+  height: 30%;
+  overflow-x: auto;
+  padding: 10px;
+  display: flex;
+}
+
+.baseImg {
+  display: block;
+  width: 100%;
+  height: auto;
+  z-index: 1;
+  background-color: #fff5e2de;
+}
+
+.hairPartPosition {
+  position: absolute;
+  top: 0%;
+  left: 18%;
+  z-index: 1;
+  @media screen and (max-width: 1500px) {
+    max-width: 55%;
+  }
+}
+.displayHairPart {
+  width: 120%;
+  height: auto;
+}
+.eyebrowPartposition {
+  position: absolute;
+  top: 12%;
+  left: 23%;
+  z-index: 3;
+  @media screen and (max-width: 1500px) {
+    max-width: 55%;
+  }
+}
+
+.eyesPartposition {
+  width: 60%;
+  position: absolute;
+  top: 13%;
+  z-index: 1;
+  @media screen and (max-width: 1500px) {
+    top: 15%;
+    max-width: 55%;
+  }
+}
+.mouthPartposition {
+  width: 15%;
+  position: absolute;
+  top: 40%;
+  left: 42.5%;
+  z-index: 1;
+  @media screen and (max-width: 1500px) {
+    max-width: 55%;
+  }
+}
+.displayMouthPart {
+  width: 100%;
+  height: auto;
+}
+.visible {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  gap: 10px; /* 行の間隔を設定 */
+}
+.hidden {
+  display: none;
+}
+
+.selected {
+  border: 2px solid blue;
+}

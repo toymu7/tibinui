@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2015",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -29,9 +29,9 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/main/page.tsx",
-    "src/app/main/page.tsx",
-    "src/app/main/hair.jsx"
+    "src/app/create/page.tsx",
+    "src/app/create/page.tsx",
+    "src/app/create/hair.jsx"
   ],
   "exclude": ["node_modules"]
 }

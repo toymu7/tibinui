@@ -1,9 +1,10 @@
-version: '3.8'
+version: "3.8"
 services:
   service_node:
-    image: node:18.18.0
+    image: node:latest
     ports:
       - 3000:3000
+      - 5555:5555
     networks:
       - my_network
     depends_on:
@@ -38,6 +39,8 @@ services:
       PGADMIN_DEFAULT_PASSWORD: password
     depends_on:
       - service_postgres
+    networks:
+      - my_network
 networks:
   my_network:
 volumes:

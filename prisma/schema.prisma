@@ -10,66 +10,131 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user {
-  id            Int        @id @default(autoincrement())
-  username      String
-  gender        String
-  date_of_birth String
-  email         String
-  password      String
-  created_at    DateTime   @default(now())
-  deleteflg     String
-  bodyparts     bodypart[]
+// userテーブル
+model User {
+  id         Int       @id @default(autoincrement())
+  name       String
+  gender     Int
+  birthday   String
+  email      String
+  password   String
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now()) @updatedAt
+  deleteflg  Int       @default(0)
+  deleted_at DateTime?
+
+  bodys Body[]
 }
 
-model hairpart {
-  id          Int      @id @default(autoincrement())
-  name        String
-  bodypart_id Int
-  bodypart    bodypart @relation(fields: [bodypart_id], references: [id])
-  created_at  DateTime @default(now())
-  deleteflg   String
+// bodyテーブル
+model Body {
+  id          Int       @id @default(autoincrement())
+  user        User      @relation(fields: [user_id], references: [id])
+  user_id     Int
+  hair_id     Int       @unique
+  eyebrows_id Int       @unique
+  eyes_id     Int       @unique
+  mouth_id    Int       @unique
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @default(now()) @updatedAt
+  deleteflg   Int       @default(0)
+  deleted_at  DateTime?
+
+  hair     Hair @relation(fields: [hair_id], references: [id])
+  eyebrows Eyebrows @relation(fields: [eyebrows_id], references: [id])
+  eyes     Eyes @relation(fields: [eyes_id], references: [id])
+  mouth    Mouth @relation(fields: [mouth_id], references: [id])
 }
 
-model eyebrowpart {
-  id          Int      @id @default(autoincrement())
-  name        String
-  bodypart_id Int
-  bodypart    bodypart @relation(fields: [bodypart_id], references: [id])
-  created_at  DateTime @default(now())
-  deleteflg   String
+// hairテーブル
+model Hair {
+  id         Int      @id @default(autoincrement())
+  part_id    Int
+  style_id   Int      @unique
+  created_at DateTime @default(now())
+  deleteflg  Int      @default(0)
+
+  body       Body?    
+  hair_style Hair_style @relation(fields: [style_id], references: [id])
 }
 
-model eyepart {
-  id          Int      @id @default(autoincrement())
-  name        String
-  bodypart_id Int
-  bodypart    bodypart @relation(fields: [bodypart_id], references: [id])
-  created_at  DateTime @default(now())
-  deleteflg   String
+// hair_styleテーブル
+model Hair_style {
+  id   Int    @id @default(autoincrement())
+  fill String
+
+  hair Hair?
 }
 
-model mouthpart {
-  id          Int      @id @default(autoincrement())
-  name        String
-  bodypart_id Int
-  bodypart    bodypart @relation(fields: [bodypart_id], references: [id])
-  created_at  DateTime @default(now())
-  deleteflg   String
+// eyebrowsテーブル
+model Eyebrows {
+  id         Int      @id @default(autoincrement())
+  part_id    Int
+  style_id   Int      @unique
+  created_at DateTime @default(now())
+  deleteflg  Int      @default(0)
+
+  body           Body?
+  eyebrows_style Eyebrows_style @relation(fields: [style_id], references: [id])
 }
 
-model bodypart {
-  id             Int           @id @default(autoincrement())
-  user_id        Int
-  user           user          @relation(fields: [user_id], references: [id])
-  hairpart_id    Int
-  hairpart       hairpart[]
-  eyebrowpart_id Int
-  eyebrowpart    eyebrowpart[]
-  eyepart_id     Int
-  eyepart        eyepart[]
-  mouthpart_id   Int
-  mouthpart      mouthpart[]
-  created_at     DateTime      @default(now())
-  deleteflg      String
+// eyebrows_styleテーブル
+model Eyebrows_style {
+  id              Int    @id @default(autoincrement())
+  fill            String
+  scale           Int
+  leftTranslateX  Int
+  rightTranslateX Int
+  translateY      Int
+  leftRotate      Int
+  rightRotate     Int
+
+  eyebrows Eyebrows?
+}
+
+// eyesテーブル
+model Eyes {
+  id         Int      @id @default(autoincrement())
+  part_id    Int
+  style_id   Int      @unique
+  created_at DateTime @default(now())
+  deleteflg  Int      @default(0)
+
+  body       Body?
+  eyes_style Eyes_style @relation(fields: [style_id], references: [id])
+}
+
+// eyes_styleテーブル
+model Eyes_style {
+  id              Int    @id @default(autoincrement())
+  fill            String
+  scale           Int
+  leftTranslateX  Int
+  rightTranslateX Int
+  translateY      Int
+  leftRotate      Int
+  rightRotate     Int
+
+  eyes Eyes?
+}
+
+// mouthテーブル
+model Mouth {
+  id         Int      @id @default(autoincrement())
+  part_id    Int
+  style_id   Int      @unique
+  created_at DateTime @default(now())
+  deleteflg  Int      @default(0)
+
+  body        Body?
+  mouth_style Mouth_style @relation(fields: [style_id], references: [id])
+}
+
+// mouth_styleテーブル
+model Mouth_style {
+  id         Int    @id @default(autoincrement())
+  fill       String
+  translateY Int
+
+  mouth Mouth?
 }
