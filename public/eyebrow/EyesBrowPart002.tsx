@@ -1,4 +1,4 @@
-import type { EyeBrowsStyle } from "partType/eyeBrows";
+import type { EyeBrowsStyle } from "partType/eyebrows";
 import { EyebrowsPartStyle } from "../../src/constants/initPartStyle";
 
 export default function EyesBrowPart002({
