@@ -1,5 +1,12 @@
-import PartCard from "./PartCard";
+import React, { useState, createContext } from "react";
+import CreateDesign from "../create/page";
+import DesignedList from "../designed/page";
 
-export default function App() {
-  return <PartCard />;
-}
+export const App = () => {
+  return (
+    <>
+      <CreateDesign />
+      <DesignedList />
+    </>
+  );
+};
